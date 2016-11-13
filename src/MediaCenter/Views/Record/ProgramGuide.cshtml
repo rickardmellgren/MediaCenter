@@ -1,0 +1,85 @@
+﻿@*@model ProgramGuideVM[]*@
+@model ProgramChannelVM
+@using MediaCenter
+
+<header>
+<style>
+        .button {
+        background-color: #4CAF50; /* Green */
+        border: 1px solid green;
+        color: white;
+        /*padding: 15px 32px;*/
+        text-align: Left;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        cursor: pointer;
+        float: left;
+        height: 50px;
+    }
+
+        .button:hover {
+            background-color: #3e8e41;
+        }
+
+        section {
+          float: left;
+          margin: 0 1.5%;
+          width: 20%;
+          position: fixed;
+          overflow: auto
+        }
+        aside {
+          float: right;
+          margin: 0 1.5%;
+          width: 80%;
+        }
+
+</style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js">
+        $(window).scroll(function () {
+            $('#channels').css('left', -$(window).scrollLeft());
+        });
+
+    </script>
+</header>
+
+
+
+    <aside>
+
+        @*@foreach (var item in Model.Programs)
+        {
+            @(item.Start + "  " + item.Id + "  " + item.OrderNo + "  " + item.Title + "  " + item.Channel + "  " + item.Description);
+            <br />
+        }*@
+
+                @for (int i = 1; i < Model.Programs[Model.Programs.Length - 1].OrderNo; i++)
+                {
+                    <table>
+                        <tr>
+                        @foreach (var item in Model.Programs)
+                        {
+                            @if (i == item.OrderNo)
+                            {
+                            <td><button class="button" style="width: @(10 * @item.Stop.Subtract(item.Start).TotalMinutes)px">@item.Title</button></td>
+                            }
+                        }
+                        </tr>
+                    </table>
+                }
+</aside>
+
+<section>
+    <div id="channels">
+        @Html.Partial("~/Views/Record/ChannelVM.cshtml", Model)
+    </div>
+</section>
+
+
+
+    <footer>
+
+    </footer>
+
+

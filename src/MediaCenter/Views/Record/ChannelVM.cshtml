@@ -1,0 +1,15 @@
+﻿@model ProgramChannelVM
+
+<div>
+    @foreach (var item in Model.TvChannels)
+    {
+        <table>
+            <tr>
+                <td>
+                    <button class="button" style="width: 100px">@*<img src="@item.Icon" alt="submit">*@@item.DisplayName</button>
+                </td>
+            </tr>
+        </table>
+      
+    }
+</div>

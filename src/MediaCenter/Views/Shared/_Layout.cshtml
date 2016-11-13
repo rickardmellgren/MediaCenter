@@ -1,0 +1,20 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    
+</head>
+<body>
+    <table>
+        <tr><td><button>Hem</button></td><td><button>Programguide</button></td><td><button>Schemalagda Program</button></td><td><button>Inspelade program</button></td><td><button>HBO</button></td><td><button>Inställningar</button><td>Klocka</td></tr>
+    </table>
+    <div>
+        @RenderBody()
+    </div>
+    
+    <link href="~/StyleSheet.css" rel="stylesheet" />
+    <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.1.0.min.js"></script>
+</body>
+</html>
