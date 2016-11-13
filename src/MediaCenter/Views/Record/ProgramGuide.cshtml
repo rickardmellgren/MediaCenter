@@ -4,6 +4,16 @@
 
 <header>
 <style>
+        
+        .icon{
+        background-color:transparent;
+        height:40px;
+        width: 40px;
+        background-position:center;
+        border:none;
+        cursor:pointer;
+        background-size: 100%;
+        }
         .button {
         background-color: #4CAF50; /* Green */
         border: 1px solid green;
@@ -25,14 +35,14 @@
         section {
           float: left;
           margin: 0 1.5%;
-          width: 20%;
-          position: fixed;
+          width: 100px;
+          position: absolute;
           overflow: auto
         }
         aside {
           float: right;
           margin: 0 1.5%;
-          width: 80%;
+          width: 90%;
         }
 
 </style>
@@ -54,7 +64,7 @@
             <br />
         }*@
 
-                @for (int i = 1; i < Model.Programs[Model.Programs.Length - 1].OrderNo; i++)
+                @for (int i = 0; i <= Model.Programs[Model.Programs.Length - 1].OrderNo; i++)
                 {
                     <table>
                         <tr>

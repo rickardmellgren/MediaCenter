@@ -14,14 +14,6 @@ namespace MediaCenter.Models
 
         static List<TvChannel> channelOrder = new List<TvChannel>
         {
-            //new TvChannel(1, "SVT1"),
-            //new TvChannel(2, "SVT2"),
-            //new TvChannel(3, "TV3 (SE)"),
-            //new Channel(4, "tv4.se", "TV4", "http://chanlogos.xmltv.se/tv4.se.png"),
-            //new Channel(5, "kanal5.se", "Kanal 5 (SE)", "http://chanlogos.xmltv.se/kanal5.se.png"),
-            //new Channel(6, "tv6.se", "TV6 (SE)", "http://chanlogos.xmltv.se/tv6.se.png"),
-            //new Channel(7, "sjuan.se", "Sjuan", "http://chanlogos.xmltv.se/sjuan.se.png"),
-            //new Channel(8, "tv8.se", "TV8", "http://chanlogos.xmltv.se/tv8.se.png"),
             new TvChannel(1, "svt1.svt.se" ,"SVT1", "http://chanlogos.xmltv.se/svt1.svt.se.png"),
             new TvChannel(2, "svt2.svt.se", "SVT2", "http://chanlogos.xmltv.se/svt2.svt.se.png"),
             new TvChannel(3, "tv3.se", "TV3 (SE)", "http://chanlogos.xmltv.se/tv3.se.png"),
@@ -36,11 +28,11 @@ namespace MediaCenter.Models
             new TvChannel(12, "tv12.tv4.se", "TV12", "http://chanlogos.xmltv.se/tv12.tv4.se.png"),
             new TvChannel(13, "kunskapskanalen.svt.se", "Kunskapskanalen", "http://chanlogos.xmltv.se/kunskapskanalen.svt.se.png"),
             new TvChannel(14, "svt24.svt.se", "SVT24", "http://chanlogos.xmltv.se/svt24.svt.se.png"),
-            new TvChannel(15, "svtb.svt.se", "Barnkanalen", "http://chanlogos.xmltv.se/svtb.svt.se.png"),
-            new TvChannel(16, "discoverychannel.se", "Discovery Channel (SE)", "http://chanlogos.xmltv.se/discoverychannel.se.png"),
-            new TvChannel(17, "hd.eurosport.se", "Eurosport HD", "http://chanlogos.xmltv.se/hd.eurosport.se.png"),
-            new TvChannel(18, "hd.eurosport2.se", "Eurosport 2 HD", "http://chanlogos.xmltv.se/hd.eurosport2.se.png"),
-            new TvChannel(19, "mtv.se", "MTV (SE)", "http://chanlogos.xmltv.se/mtv.se.png"),
+            //new TvChannel(15, "svtb.svt.se", "Barnkanalen", "http://chanlogos.xmltv.se/svtb.svt.se.png"),
+            //new TvChannel(16, "discoverychannel.se", "Discovery Channel (SE)", "http://chanlogos.xmltv.se/discoverychannel.se.png"),
+            //new TvChannel(17, "hd.eurosport.se", "Eurosport HD", "http://chanlogos.xmltv.se/hd.eurosport.se.png"),
+            //new TvChannel(18, "hd.eurosport2.se", "Eurosport 2 HD", "http://chanlogos.xmltv.se/hd.eurosport2.se.png"),
+            //new TvChannel(19, "mtv.se", "MTV (SE)", "http://chanlogos.xmltv.se/mtv.se.png"),
         };
 
         static MediaCenterManager()
@@ -67,7 +59,7 @@ namespace MediaCenter.Models
             {
                 TimeSpan span = p.Stop.Subtract(p.Start);
                 double showLength = span.TotalMinutes;
-                int orderNo = 0;
+                int orderNo = 1;
                 foreach (var item in channelOrder)
                 {
                     if (p.Channel == item.ChannelName)
@@ -107,7 +99,10 @@ namespace MediaCenter.Models
              * var query = people.OrderByDescending(person => person.Name)
                   .ThenByDescending(person => person.Age)
                   .Select(person => person.Name);*/
-            return programs.OrderBy(p => p.OrderNo)
+            DateTime timeNow = DateTime.Now;
+            return programs
+                .Where(p => p.Start > timeNow)
+                .OrderBy(p => p.OrderNo)
                 .ThenBy(p => p.Start)
                 .Select(p => new ProgramGuideVM
                 {
