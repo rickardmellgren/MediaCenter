@@ -38,7 +38,7 @@ namespace MediaCenter.Models
         static MediaCenterManager()
         {
             //Load xml
-            XDocument xdoc = XDocument.Load("se3.xml");
+            XDocument xdoc = XDocument.Load("/xml\\se3.xml");
 
             //Console.WriteLine(xdoc);
 
@@ -72,36 +72,13 @@ namespace MediaCenter.Models
                 //Console.WriteLine(p.Title + "   " + p.Description + "  " + p.Channel + "    " + p.Start + "-" + p.Stop);
                 programNo++;
             }
-
-            //var channelList = from item in xdoc.Descendants("channel")
-            //                  select new
-            //                  {
-            //                      //ChannelName = item.Attribute("id").Value,
-            //                      DisplayName = item.Element("display-name").Value,
-            //                      Icon = item.Attribute("src").Value
-            //                  };
-
-            //foreach (var c in channelList)
-            //{
-            //    //docs = docs.OrderBy(d => docsIds.IndexOf(d.Id)).ToList();
-            //    foreach (var item in channelOrder)
-            //    {
-            //        if (c.DisplayName == item.DisplayName)
-            //            channels.Add(new TvChannel(item.OrderNo, c.ChannelName, c.DisplayName, c.Icon));
-            //    }
-            //}
         }
 
         internal static ProgramGuideVM[] ListPrograms()
         {
-
-            /*
-             * var query = people.OrderByDescending(person => person.Name)
-                  .ThenByDescending(person => person.Age)
-                  .Select(person => person.Name);*/
             DateTime timeNow = DateTime.Now;
             return programs
-                .Where(p => p.Start > timeNow)
+                .Where(p => p.Stop > timeNow)
                 .OrderBy(p => p.OrderNo)
                 .ThenBy(p => p.Start)
                 .Select(p => new ProgramGuideVM
