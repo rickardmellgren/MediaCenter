@@ -1,0 +1,10 @@
+﻿@model TvShowInfoVM
+
+
+<img src="@Model.Channel.Icon" height="42" width="42">
+
+<!--@Model.Channel.DisplayName-->
+<h2>@Model.Program.Title</h2>
+<h3>@Model.Program.Start.ToString("HH:mm")-@Model.Program.Stop.ToString("HH:mm")</h3>
+<p>@Model.Program.Description</p>
+<button class="button" onClick="history.go(-1);return true;">Tillbaka</button><button class="button">Spela in</button>

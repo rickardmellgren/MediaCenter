@@ -20,22 +20,27 @@ namespace MediaCenter
             var model = new ProgramChannelVM { Programs = programs.ToArray(), TvChannels = tvChannels.ToArray() };
 
             return View(model);
-            //ProgramGuideVM[] viewModels = MediaCenterManager.ListPrograms();
-            //return View(viewModels);
         }
 
-        
+        // GET: /<controller>/
+        public IActionResult ShowInfo(int id)
+        {
+            ProgramGuideVM tvShow = MediaCenterManager.GetShowData(id);
+            TvChannel channel = MediaCenterManager.GetChannelForShow(tvShow.Channel);
+
+            var model = new TvShowInfoVM { Program = tvShow, Channel = channel };
+            return View(model);
+        }
+
         public IActionResult ChannelsPW()
         {
             TvChannel[] viewModels = MediaCenterManager.ListChannels();
-            //RedirectToAction("ProgramGuide");
             return PartialView(viewModels);
         }
 
         public IActionResult ManualRecord()
         {
             TvChannel[] viewModels = MediaCenterManager.ListChannels();
-            //RedirectToAction("ProgramGuide");
             return PartialView(viewModels);
         }
     }

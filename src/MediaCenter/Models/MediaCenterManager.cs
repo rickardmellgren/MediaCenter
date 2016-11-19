@@ -73,7 +73,34 @@ namespace MediaCenter.Models
                 programNo++;
             }
         }
+        internal static TvChannel GetChannelForShow(string channel)
+        {
+            TvChannel tvChannel = channelOrder
+                .FirstOrDefault(c => c.ChannelName == channel);
 
+            return new TvChannel
+            {
+                DisplayName = tvChannel.DisplayName,
+                Icon = tvChannel.Icon
+            };
+        }
+
+        internal static ProgramGuideVM GetShowData(int id)
+        {
+            ProgramData resultSet = programs
+                .FirstOrDefault(p => p.Id == id);
+
+            return new ProgramGuideVM
+            {
+                Id = resultSet.Id,
+                OrderNo = resultSet.OrderNo,
+                Channel = resultSet.Channel,
+                Title = resultSet.Title,
+                Stop = resultSet.Stop,
+                Start = resultSet.Start,
+                Description = resultSet.Description
+            };
+        }
         internal static ProgramGuideVM[] ListPrograms()
         {
             DateTime timeNow = DateTime.Now;

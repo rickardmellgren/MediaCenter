@@ -2,20 +2,20 @@
 
 <div>
 
-    <table>
+    <table cellspacing="0">
         <tr>
             <td>
-                <button class="button" style="width: 80px">Kanal</button>
+                <div class="top" text-align="center" style="width: 70px">Kanal</div>
             </td>
         </tr>
     </table>
 
     @foreach (var item in Model.TvChannels)
     {
-        <table>
+        <table cellspacing="0">
             <tr>
                 <td>
-                    <button class="button" style="width: 80px"><img src="@item.Icon" alt="submit" class="icon" value="">@*@item.DisplayName*@</button>
+                    <button class="button" padding="10px" style="width: 70px"><img src="@item.Icon" alt="submit" class="icon" value="">@*@item.DisplayName*@</button>
                 </td>
             </tr>
         </table>
